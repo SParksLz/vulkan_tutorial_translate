@@ -10,7 +10,6 @@
     - ## [Step 7 - Command pools and command buffers](#step7)
     - ## [Step 8 - Main loop](#step8)
     - ## [Summary](#summary)
-    
 + ## [API concepts](#api_concept)
     - ## [Coding conventions](#codingCov)
     - ## [Validation layers](#validation)
