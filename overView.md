@@ -10,6 +10,7 @@
     - ## [Step 7 - Command pools and command buffers](#step7)
     - ## [Step 8 - Main loop](#step8)
     - ## [Summary](#summary)
+    
 + ## [API concepts](#api_concept)
     - ## [Coding conventions](#codingCov)
     - ## [Validation layers](#validation)
@@ -85,7 +86,7 @@
 > + 这是很多步骤，但是在接下来的章节中，每个步骤的目的都会变得非常简单明了。 如果您对单个步骤与整个程序之间的关系感到困惑，则应返回本章。
 
 > # <A NAME="api_concept">API Concept</a>
->> # <A NAME="codingCov">Coding conventions（代码规则）<a/>
+>> # <A NAME="codingCov">Coding conventions(代码规则)</a>
 >> #### Vulkan中所有的功能，枚举，结构体都被定义在vulkan.h这个头文件中，而这个头文件被包含在LunarG开发的Vulkan SDK中，我们将在下一个章节中研究安装这个SDK。
 >> +  函数具有小写的vk前缀
 >> +  枚举，结构体这类的是VK作为前缀并且枚举值具有的是VK_前缀
