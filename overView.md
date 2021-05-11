@@ -70,7 +70,7 @@
 > + 提交到队列的操作是异步执行的。因此，我们必须使用诸如信号量之类的同步对象来确保正确的执行顺序。必须设置绘制命令缓冲区的执行以等待图像获取完成，否则可能会开始渲染到仍在读取以在屏幕上呈现的图像。反过来，vkQueuePresentKHR调用需要等待渲染完成，为此，我们将使用第二个信号量，该信号量在渲染完成后发出信号。
 
 > # <A NAME="summary">Summary</a>
-> + 这次快速的旅途将使您对绘制第一个三角形的工作有一个基本的了解。 实际程序包含更多步骤，例如分配顶点缓冲区，创建统一缓冲区和上传纹理图像，这些将在后续章节中介绍，但我们将从简单开始，因为Vulkan拥有足够的陡峭学习曲线。 请注意，我们将通过在顶点着色器中最初嵌入顶点坐标而不是使用顶点缓冲区来作弊。 这是因为管理顶点缓冲区需要首先熟悉命令缓冲区。\
+> + 这次快速的旅途将使您对绘制第一个三角形的工作有一个基本的了解。 实际程序包含更多步骤，例如分配顶点缓冲区，创建统一缓冲区和上传纹理图像，这些将在后续章节中介绍，但我们将从简单开始，因为Vulkan拥有足够的陡峭学习曲线。 请注意，我们将通过在顶点着色器中最初嵌入顶点坐标而不是使用顶点缓冲区来作弊。 这是因为管理顶点缓冲区需要首先熟悉命令缓冲区。
 > + ## 简而言之，要绘制第一个三角形，我们需要：
 >   - 创建一个VkInstance
 >   - 选择一个支持的显卡设备（VkPhysicalDevice）
@@ -87,9 +87,9 @@
 > # <A NAME="api_concept">API Concept</a>
 >> # <A NAME="codingCov">Coding conventions（代码规则）<a/>
 >> #### Vulkan中所有的功能，枚举，结构体都被定义在vulkan.h这个头文件中，而这个头文件被包含在LunarG开发的Vulkan SDK中，我们将在下一个章节中研究安装这个SDK。
->> + ·函数具有小写的vk前缀
->> + ·枚举，结构体这类的是VK作为前缀并且枚举值具有的是VK_前缀
->> + ·API大量使用结构体为函数提供参数。 例如，对象创建通常遵循以下模式：
+>> +  函数具有小写的vk前缀
+>> +  枚举，结构体这类的是VK作为前缀并且枚举值具有的是VK_前缀
+>> +  API大量使用结构体为函数提供参数。 例如，对象创建通常遵循以下模式：
 >> ```cpp
 >>VkXXXCreateInfo createInfo{};
 >>createInfo.sType = VK_STRUCTURE_TYPE_XXX_CREATE_INFO;
@@ -97,7 +97,8 @@
 >>createInfo.foo = ...;
 >>createInfo.bar = ...;
 >>VkXXX object;
->>if (vkCreateXXX(&createInfo, nullptr, &object) != VK_SUCCESS) {
+>>if (vkCreateXXX(&createInfo, nullptr, &object) != VK_SUCCESS) 
+>>{
 >>    std::cerr << "failed to create object" << std::endl;
 >>    return false;
 >>}
