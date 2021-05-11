@@ -1,4 +1,7 @@
 # Overview(概览)
+
+> + # [API concepts](#api_concept)
+
 > #  Origin of Vulkan(Vulkna的由来)
 > 和以前的图形API一样，Vulkan被设计为基于GPU的跨平台抽象。大部分这些图形API的问题在于在它们被设计的时代就采用了图形硬件，而图形硬件被固定的功能所限制。程序员需要用标准的格式去提供顶点的数据，并且灯光和阴影选项方面受GPU制造商的支配。
 > + 随着显卡架构的越发成熟，他们开始提供越来越多的可编程的功能。所有的这些新的功能必须以某些方式与现有的API集成到一起。 This resulted in less than ideal abstractions and a lot of guesswork on the graphics driver side to map the programmer's intent to the modern graphics architectures.   这就是为什么要进行如此多的显卡驱动更新去提高游戏的性能，有时是很大幅度的提升。由于这些驱动的复杂性，应用软件的程序开发人员还需要处理供应商之间的不一致问题，例如着色器的语法。除了这些新功能，过去十年来还涌入了具有强大图形硬件的移动设备。这些移动GPU根据其性能和空间要求具有不同的体系结构。其中的一个例子就是tiled rendering（平铺渲染？？），它可以通过为程序员提供更多对该功能控制权来提高性能。源自这些API的另外一个限制就是有限的多线程支持，这可能会导致CPU的瓶颈。
@@ -73,7 +76,7 @@
 
 > 这是很多步骤，但是在接下来的章节中，每个步骤的目的都会变得非常简单明了。 如果您对单个步骤与整个程序之间的关系感到困惑，则应返回本章。
 
-# API concepts
+# <A NAME="api_concept">API Concept</a>
 ># Coding conventions（代码规则）
 > #### Vulkan中所有的功能，枚举，结构体都被定义在vulkan.h这个头文件中，而这个头文件被包含在LunarG开发的Vulkan SDK中，我们将在下一个章节中研究安装这个SDK。
 > + ·函数具有小写的vk前缀
