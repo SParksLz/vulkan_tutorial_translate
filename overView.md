@@ -13,6 +13,7 @@
 + ## [API concepts](#api_concept)
     - ## [Coding conventions](#codingCov)
     - ## [Validation layers](#validation)
+<kbd>内容</dbd>
 
 
 > # <A NAME="originVulkan">Origin of Vulkan(Vulkna的由来)</a>
@@ -25,11 +26,11 @@
 
 
 > # <A NAME="step1">Step 1 - Instance and physical device selection</a>
-> + ### 关键词：VkInstance VkPhysicalDevices
-> + 一个Vulkan的软件通过VKInstance去设置Vulkan API。通过描述一个应用程序以及任何将要用到的API扩展来创建一个实例。在创建了实例之后，可以查询Vulkan支持的硬件，并且选择一个或者多个VkPhysicalDevices来用于操作。可以查询诸如VRAM大小和设备功能之类的属性，以用来选择所需的设备，例如偏向于使用专业的图形卡。
+> + ### 关键词：<kbd><font color=red><font face="微软雅黑">VKInstance</font></font></kbd> <kbd><font color=red><font face="微软雅黑">VkPhysicalDevices</font></font></kbd>
+> + 一个Vulkan的软件通过<kbd><font color=red><font face="微软雅黑">VKInstance</font></font></kbd>去设置Vulkan API。通过描述一个应用程序以及任何将要用到的API扩展来创建一个实例。在创建了实例之后，可以查询Vulkan支持的硬件，并且选择一个或者多个<kbd><font color=red><font face="微软雅黑">VkPhysicalDevices</font></font></kbd>来用于操作。可以查询诸如VRAM大小和设备功能之类的属性，以用来选择所需的设备，例如偏向于使用专业的图形卡。
 
 > # <A NAME="step2">Step 2 - Logical device and queue families</a>
-> + ### 关键词：VkDevice VkPhysicalDeviceFeatures queue_families VkQueue 
+> + ### 关键词：<kbd><font color=red><font face="微软雅黑">VkDevice</font></font></kbd> queue_families VkQueue <kbd><font color=red>VkPhysicalDeviceFeatures</font></font></kbd>
 > + Physical_device
 逻辑设备以及队列系列
 在选择好正确的使用的硬件设备之后，我们需要去创建一个VkDevice（logical device），这是我们用来更加具体的描述我们将要使用的VkPhysicalDeviceFeatures，例如像多Viewport的渲染以及64位浮点数。同时我们需要去具体的指出我们需要用到哪个队列族（queue families）。通过将Vulkan执行的大多数操作（例如绘制命令和内存操作）提交给VkQueue可以异步执行。Queue是由queue family分配的。每一个queue family可以在这个队列中支持一组特定的操作。例如，可能有用于图形，计算和内存传输操作的单独队列系列。Queue family同样可以用来去作为一个判别因素去选择physical device。支持Vulkan的设备有可能不提供任何图形功能，但是当今所有具有Vulkan支持的图形卡通常都将支持我们感兴趣的所有队列操作。
@@ -90,7 +91,7 @@
 >> +  函数具有小写的vk前缀
 >> +  枚举，结构体这类的是VK作为前缀并且枚举值具有的是VK_前缀
 >> +  API大量使用结构体为函数提供参数。 例如，对象创建通常遵循以下模式：
->> ```cpp
+>>  ```cpp
 >>VkXXXCreateInfo createInfo{};
 >>createInfo.sType = VK_STRUCTURE_TYPE_XXX_CREATE_INFO;
 >>createInfo.pNext = nullptr;
@@ -106,3 +107,9 @@
 >>
 >>  Vulkan中的许多结构体要求我们在sType成员中显示指定结构的类型。pNext成员可以指向一个扩展的结构体而在本教程中始终为nullptr。创建或者销毁一个对象的函数将需要VkAllocationCallbacks参数，这个参数允许我们用来去自定义地用来分配驱动内存的分配器，在这个教程中也始终为nullptr。
 >> 几乎所有的函数都返回一个VkResult，这个结果要么是VK_SUCCESS或者一段错误的代码。这个规范面熟了每个函数可以返回的错误代码以及它们的含义。
+
+> # <A NAME="validation_layers">Validation layers</a>
+> + 前文提到过，Vulkan是为提高性能已经降低驱动开销而设计的。因此，默认情况下它包含的错误检查和debug能力是特别有限的。当我们进行了一些误操作的时候，它往往不会返回错误代码而是直接崩溃，更糟糕的是，它可能会只能在我们自己的显卡上运行，却无法在其他的显卡上。
+> + Vulkan允许你通过一个叫做验证层（validation layer）的东西来开始广泛的检查。验证层可以是安插在API和图形驱动程序之间的代码，以执行诸如对功能参数进行额外检查以及跟踪内存管理问题之类的操作。好消息是我们可以在开发的期间启用它们，然后在发布应用的时候以零开销完全禁用它们。任何人都可以编写自己的验证层，但是LunarG的Vulkan SDK提供了一组标准的验证层，我们将在本教程中使用这些验证层。 您还需要注册一个回调函数以接收来自各层的调试消息。
+> + 由于Vulkan对每个操作都非常明确，并且验证层是如此广泛，因此与OpenGL和Direct3D相比，找出屏幕为何为黑色的过程实际上要容易得多！
+> + 在我们开始编写代码之前，只需要再迈出一步，那就是在建立开发环境。
