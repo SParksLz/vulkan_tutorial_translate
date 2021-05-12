@@ -9,7 +9,7 @@
     - ## [Step 6 - Graphics pipeline](#step6)
     - ## [Step 7 - Command pools and command buffers](#step7)
     - ## [Step 8 - Main loop](#step8)
-    - ## [Summary](#summary)
+    - ## [Summary](#summary_a)
 + ## [API concepts](#api_concept)
     - ## [Coding conventions](#codingCov)
     - ## [Validation layers](#validation)
@@ -70,7 +70,7 @@
 > + 现在，绘制命令已经被包装到命令缓冲中，主循环非常简单。我们首先使用vkAcquireNextImageKHR从交换链中获取图像。然后我们可以为这个图像选择一个合适的命令缓冲，并用vkQueueSubmit去执行它。最后我们使用vkQueuePresentKHR将图像返回到交换链中，并且呈现到屏幕上。
 > + 提交到队列的操作是异步执行的。因此，我们必须使用诸如信号量之类的同步对象来确保正确的执行顺序。必须设置绘制命令缓冲区的执行以等待图像获取完成，否则可能会开始渲染到仍在读取以在屏幕上呈现的图像。反过来，vkQueuePresentKHR调用需要等待渲染完成，为此，我们将使用第二个信号量，该信号量在渲染完成后发出信号。
 
-> # <A NAME="summary">Summary</a>
+> # <A NAME="summary_a">Summary</a>
 > + 这次快速的旅途将使您对绘制第一个三角形的工作有一个基本的了解。 实际程序包含更多步骤，例如分配顶点缓冲区，创建统一缓冲区和上传纹理图像，这些将在后续章节中介绍，但我们将从简单开始，因为Vulkan拥有足够的陡峭学习曲线。 请注意，我们将通过在顶点着色器中最初嵌入顶点坐标而不是使用顶点缓冲区来作弊。 这是因为管理顶点缓冲区需要首先熟悉命令缓冲区。
 > + ## 简而言之，要绘制第一个三角形，我们需要：
 >   - 创建一个VkInstance
